@@ -1,0 +1,10 @@
+.ticBoard{
+    display: flex;
+    flex-direction: column;
+    margin:auto;
+    margin-top: 10%;
+    width:50%;
+    color: black;
+}
+
+

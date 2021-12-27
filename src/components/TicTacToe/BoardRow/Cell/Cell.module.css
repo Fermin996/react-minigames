@@ -1,0 +1,22 @@
+.rowOne{
+    display: flex;
+    border-bottom:5px solid black;
+    height:180px;
+    flex-direction: row;
+}
+
+.nodess{
+    margin:0px;  
+    height:100%;
+    width:100%;
+    background-color: darkgray;
+    border-right: 2px solid black;
+    font-size: 50px;
+    color:black;
+    text-align: center;
+  }
+  
+  .nodess:hover{
+      background-color: gray;  
+      cursor: pointer;
+  }

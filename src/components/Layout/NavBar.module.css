@@ -1,0 +1,36 @@
+.navBox{
+    background-color:#871F78;
+    color:whitesmoke;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.webHeading{
+    margin-left: 20px;
+}
+
+.gamesUl{
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 600px;
+}
+
+
+li{
+    list-style-type: none;
+    text-decoration: none;
+}
+
+.gamesClick{
+    list-style-type: style type none ;
+    text-decoration: none;
+    color: white ;
+}
+
+.gamesClick:hover{
+    color: darkseagreen;
+    font-size: 19px;
+}

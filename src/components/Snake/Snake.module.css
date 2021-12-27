@@ -1,0 +1,13 @@
+.gridCont{
+
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    width: 500px;
+    height:500px;
+    border-radius: 5px;
+    border:5px solid black;
+    margin:auto;
+
+}
