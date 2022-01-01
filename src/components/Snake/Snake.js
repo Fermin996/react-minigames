@@ -1,17 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+//import { useInterval } from 'usehooks-ts';
 
 import styles from './Snake.module.css'
 import SnakeRow from './SnakeRow/SnakeRow'
 //import Square from './Square/Square'
 
-const Snake=(props)=>{
+const Snake=()=>{
 
     
     const [headNode, setHead]=useState([4,4]);
     const [direction, setDirection]=useState("R");
     const [foodNode, setFoodNode]=useState(randomPair)
 
-    //console.log(foodNode)
+    
+    function useInterval(callback, delay) {
+        const savedCallback = useRef();
+      
+        // Remember the latest callback.
+        useEffect(() => {
+          savedCallback.current = callback;
+        }, [callback]);
+      
+        // Set up the interval.
+        useEffect(() => {
+          function tick() {
+            savedCallback.current();
+          }
+          if (delay !== null) {
+            let id = setInterval(tick, delay);
+            return () => clearInterval(id);
+          }
+        }, [delay]);
+      }
+
     
     function randomPair(){
         let pair=[]
@@ -22,8 +43,6 @@ const Snake=(props)=>{
 
         }
 
-        console.log(pair)
-
         return pair
 
     }
@@ -32,58 +51,20 @@ const Snake=(props)=>{
     let rowNum=1;
     let grid=[];
 
-
-
     useEffect(()=>{
+        window.addEventListener('keydown', e=>{
 
-        // window.addEventListener('keydown', e=>{
-
-        //     handleKeyDown(e)
-
-        // })
-
-
-        const interval = setInterval(()=>{
-            // let changeArr=[headNode]
-            // if(direction==="U"){
-            //     changeArr=[headNode[0],headNode[1]-1]
-            // }else if(direction==="D"){
-            //     changeArr=[headNode[0],headNode[1]+1]
-            // }else if(direction==="L"){
-            //     changeArr=[headNode[0]-1, headNode[1]]
-            // }else if(direction==="R"){
-            //     changeArr=[headNode[0]+1, headNode[1]]
-            // }
-            setDirection((direction)=>direction)
-            console.log(direction)
-            setHead((headNode)=> {
-                if(direction==="U"){
-                    return [headNode[0],headNode[1]-1]
-                }else if(direction==="D"){
-                    return [headNode[0],headNode[1]+1]
-                }else if(direction==="L"){
-                    return [headNode[0]-1, headNode[1]]
-                }else if(direction==="R"){
-                    return [headNode[0]+1, headNode[1]]
-                }
-            })
-        },1000)
-        return()=>clearInterval(interval);
-
-
-       
-
-
+            handleKeyDown(e)
+    
+        });
     },[])
 
-    window.addEventListener('keydown', e=>{
-
-        handleKeyDown(e)
-
-    })
+   
 
     const handleKeyDown=e=>{
         const newDirection=getDirection(e.key);
+
+        //console.log(newDirection)
 
         if(newDirection !== ''){
             setDirection(newDirection);
@@ -96,19 +77,20 @@ const Snake=(props)=>{
 
     function getDirection(key){
 
+        console.log(direction)
 
-        if(key==='ArrowUp'){
+        if(key==='ArrowUp' && direction !== "D"){
             //setDirection("U")
             //console.log(direction)
             return "U"
-        }else if(key==='ArrowDown'){
+        }else if(key==='ArrowDown' && direction !== "U"){
             //setDirection("D")
             //console.log(direction)
             return "D"
-        }else if(key==='ArrowLeft'){
+        }else if(key==='ArrowLeft' && direction !== "R"){
             //setDirection("L"
             return "L"
-        }else if(key==='ArrowRight'){
+        }else if(key==='ArrowRight' && direction !== "L"){
             //setDirection("R")
             return "R"
         }else{
@@ -116,6 +98,19 @@ const Snake=(props)=>{
         }
 
     }
+
+
+    useInterval(()=>{
+        if(direction==="U"){
+            setHead([headNode[0], headNode[1]-1])
+        }else if(direction==="D"){
+            setHead([headNode[0], headNode[1]+1])
+        }else if(direction==="L"){
+            setHead([headNode[0]-1, headNode[1]])
+        }else if(direction==="R"){
+            setHead([headNode[0]+1, headNode[1]])
+        }
+      }, 300)
 
 
 
@@ -145,8 +140,6 @@ const Snake=(props)=>{
         
         <div className={styles.gridCont}>
             {container}
-
-            {/* <div onKeyDown={checkKey}/> */}
         </div>
 
     );

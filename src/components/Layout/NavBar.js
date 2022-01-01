@@ -18,7 +18,11 @@ const NavBar=(props)=>{
                         Snake
                     </NavLink>    
                 </li>
-                <li className={styles.gamesClick}>Go</li>
+                <li className={styles.gamesClick}>
+                    <NavLink to='/mine-sweeper' className={styles.gamesClick}>
+                        MineSweeper
+                    </NavLink>
+                </li>
                 <li className={styles.gamesClick}>Chess</li>
                 <li className={styles.gamesClick}>Checkers</li>
             </ul>
